@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://blm305.github.io/2021/work/displayBlob -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <title>Remote URL or Local file </title>
+
+<style>
+  body { max-width: 500px; }
+  div { margin: 12px 0; }
+  img {
+    max-width: 100%;
+    border: 1px solid darkgray;
+  }
+  #remote {
+    width: 290px;
+    font: 13px arial, sans-serif;
+    margin: 14px 0;
+    border: 1px solid darkgray;
+    padding: 5px;
+  }
+  #sample, #out { overflow-x: auto; }
+  #disp1 { color: blue; }
+</style>
+</head>
+
+<body class="vsc-initialized">
+<h2 id="title">Remote URL or Local file</h2>
+
+<div>
+  URL: 
+  <input type="text" id="remote" onchange="displayURL(this.value)"> <br>
+  <input type="file" id="button" onchange="displayBlob(this.files[0])">
+</div>
+<div id="msg">Select text or image </div>
+<pre id="disp1"></pre> <img id="disp2">
+
+<hr>
+<b>Sample code</b>
+<pre id="sample">function displayURL(u) {<br>    fetch(u).then(console.log) //call r.blob()<br>            .then(displayBlob)<br>            .catch(console.error)<br>}<br>function displayBlob(f) {<br>    console.assert(f instanceof Blob)<br>    msg.innerText = f.size+" bytes "+f.type<br>    disp1.innerText = ""; disp2.src = ""<br>    if (f.type.startsWith("image")) {<br>        RDR.readAsDataURL(f); //display image<br>        RDR.onload = () =&gt; console.log(f, RDR)<br>    } else if (f.type.startsWith("text")) {<br>        RDR.readAsText(f);  //display text<br>        RDR.onload = () =&gt; console.log(f, RDR)<br>    } else {<br>        msg.innerText += " -- Unknown"<br>    }<br>}</pre>
+<hr>
+<p>Ref: <a href="https://blm305.github.io/2021/work/Reading_files">Reading files</a>
+ </p>
+
+<script>
+"use strict";
+
+const RDR = new FileReader();
+/**
+function displayURL(u) {
+    fetch(u).then(console.log) //call r.blob()
+            .then(displayBlob)
+            .catch(console.error)
+}
+function displayBlob(f) {
+    console.assert(f instanceof Blob)
+    msg.innerText = f.size+" bytes "+f.type
+    disp1.innerText = ""; disp2.src = ""
+    if (f.type.startsWith("image")) {
+        RDR.readAsDataURL(f); //display image
+        RDR.onload = () => console.log(f, RDR)
+    } else if (f.type.startsWith("text")) {
+        RDR.readAsText(f);  //display text
+        RDR.onload = () => console.log(f, RDR)
+    } else {
+        msg.innerText += " -- Unknown"
+    }
+}
+**/
+function displayURL(u) {
+    fetch(u).then(r => r.blob())
+            .then(displayBlob)
+            .catch(e => disp1.innerText = e)
+}
+function displayBlob(f) {
+    console.assert(f instanceof Blob)
+    msg.innerText = f.size+" bytes "+f.type
+    disp1.innerText = ""; disp2.src = ""
+    
+    if (f.type.startsWith("image")) {
+        RDR.readAsDataURL(f); //display image
+        RDR.onload = () => disp2.src = RDR.result
+        console.log(f,RDR)
+    } else if (f.type.startsWith("text")) {
+        RDR.readAsText(f);  //display text
+        RDR.onload = () =>disp1.innerText=RDR.result
+        console.log(f, RDR)
+    } else {
+        msg.innerText += " -- Unknown"
+        
+    }
+}
+title.innerText = document.title
+sample.innerText = displayURL+'\n'+displayBlob
+</script>
+
+
+
+</body></html>
