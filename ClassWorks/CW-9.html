@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <title>HomeWork</title>
+
+  <style>
+    body { max-width: 440px; }
+    pre  { overflow-x: auto; }
+    input { width: 50px }
+  </style>
+
+<body class="vsc-initialized">
+
+<h2 id="title">Kuvvet Tablosu</h2>
+x = <input type="number" id="num1" value="1" onchange="calculate()">
+ 
+y = <input type="number" id="num2" value="1" onchange="calculate()">
+
+<span id="res"> x^y = 1</span>
+<pre id="out">   y=1   y=2  y=3  y=4  y=5
+     <br>x=1   1  1  1  1   1 <br>x=2   2   4   8   16  32 <br>x=3   3    9   27   81   243 <br>x=4   4   16  64    256   1024 <br>x=5  5    25   125  625  3125 </pre>
+
+<hr>
+<b>Öğrenci</b>
+<pre id="ogrenci">  </pre>
+
+
+
+<script>
+"use strict";
+function power(x, y) {
+    let result = x
+    for (let k=1; k<y; k++) result = result*x
+    return result
+}
+function calculate() {
+    let x = Number(num1.value)
+    if (!Number.isInteger(x)) {
+       x = Math.round(x); num1.value = x
+    }
+    let y = Number(num2.value)
+    res.innerText = "x^y = "+power(x, y)
+}
+
+function doTable() {
+    const R = [1, 2, 3, 4, 5]
+    let a = R.map((y) => 'y='+y)
+    let str = header(a)
+    for (let x=0; x<=5; x++) { 
+       let a = R.map((y) => power(x, y))
+       str += oneLine(a, x)
+    }
+    return str
+}
+let header  = (a) => '       '+ a.join('  ')  //pre
+let oneLine = (a, x) => '\nx='+x+'   '+ a.join('    ')
+  title.innerText = document.title
+    ogrenci.innerText = "Ömer Kaan Adaş"+'\n'+"1921221035"+'\n'+"Home Work"
+    calculate()
+    out.innerText = doTable()
+</script>
+
+
+
+</body></html>
