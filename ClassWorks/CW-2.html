@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Data Analysis</title>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+
+<p>Minimum Correlation =
+<input type=number id=inp value="0.0"
+  style="width:50px" onChange="report(analyze(value))">
+</p>
+<p id=out></p>
+
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+
+<hr />
+<p>Ref: <a href="http://eloquentjavascript.net/04_data.html#p_LI+01yIQON"
+   target="ExternalDocument">Final analysis</a> &nbsp;
+   
+</p>
+
+<script>
+function report(a) {
+  out.innerText = JOURNAL.length+" journal entries and "
+                + a.length+" events\n" + a.join("\n")
+}
+    title.innerText = document.title;
+   //Set to Array
+   
+
+
+    function range (start, end, inc = 1){
+        size = end - start
+        if(size<0){
+            size*=-1
+        }
+        tmp = []
+        add = start
+        for(let i = 0; i<=size; i++ ){
+            tmp[i]=add
+            add+=inc
+        }
+        return tmp
+    }
+   
+   function sum (arr){
+       tmp=0
+       for(let i = 0;i<arr.length;i++){
+           tmp+=arr[i]
+       }
+       return tmp
+   }
+
+
+  console.log(range(1,10))
+  console.log(range(5,2,-1))
+  console.log(sum(range(1,10)))
+
+  sample.innerText = range+"\n\n"+sum
+
+ 
+</script>
+</body>
+</html>
