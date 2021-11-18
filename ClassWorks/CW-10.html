@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+    <title>CW-10 </title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+
+  </style>
+</head>
+
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+
+<h2 id=title title="Put your name here"></h2>
+<p title="Status">
+  Status : <span id=on></span>
+</p>
+<p title="Battery level (integer)">
+  Battery level: <span id=lev></span>
+  
+   - <span id=cha></span>
+</p>
+<p title="Last Key">
+  Last Key : <span id=key></span>
+</p>
+<hr />
+<b>Sample code</b>
+<pre id=sample>This text is not shown. Why?</pre>
+
+<hr />
+
+<script>
+"use strict";
+function init() {
+//complete the code below  
+    window.onoffline = e => on.innerText=e.type
+    window.ononline = e => on.innerText=e.type
+    window.onkeyup = e => key.innerText=e.key
+
+    navigator.getBattery().then(b =>
+        lev.innerText = '%'+b.level*100 
+      );
+    navigator.getBattery().then(b => display(b));
+}
+
+function display(b) {
+            let tmp = (b) => b.charging ? 'Charging' : 'Discharging'
+            b.onchargingchange = e => cha.innerText = b.charging;
+            b.onclevelchange = e => lev.innerText = tmp(b) + '' +
+                (b.level * 100).toFixed(0) + '%';
+
+        }
+
+    title.innerText = document.title;
+    sample.innerText = init+'\n';
+    init();
+</script>
+
+</body>
+</html>
