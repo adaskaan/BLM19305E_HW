@@ -30,7 +30,9 @@
 <p id=locF>Location : </p>
 <p id=mailF>Mail : </p>
 <p id=gitF>Main Page : </p>
-
+<b>Sample code</b>
+<hr>
+<pre id=sample></pre>
 <p>Ref: 
   <a href="https://docs.github.com/en/rest/reference/rate-limit" target=NewTab>GitHub API</a> &emsp;
 </p>
@@ -92,21 +94,13 @@ async function readUser() {
     if(m!=null){
     mailF.innerHTML = "Mail : "+m
     }else mailF.innerHTML = "Mail : unspecified" 
-    //add repo count and repo names
-    /*
-    let n = u.public_repos
-    out.innerHTML += BR+`${n} public repos`+BR+BR
-    if (!n) return
-    let b = await toJSON(URL+u.login+"/repos")
-    out.innerHTML += b.map(x => x.name).join(", ")
-    */
     let c = u.company
     if(c!=null){
     orgF.innerHTML = "Organization :"+c
     }else orgF.innerHTML = "Organization : unspecified" 
 }
     title.innerText = document.title
-    //sample.innerText = toJSON +'\n'+ readUser
+    sample.innerText = toJSON +'\n'+ readUser
     readUser()
 </script>
 <script src="../navbar.js"></script>
