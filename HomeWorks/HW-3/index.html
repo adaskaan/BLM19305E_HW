@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Animation</title>
+
+<div id="demo">
+
+  <style>
+   body { max-width: 500px; }
+   #box {
+    font-size: 50px;
+    background: #a2b9bc;
+    width: 304px;
+    height: 120px;
+    position: relative;
+  }
+  #image {
+    height: 272px;
+    width: 304px;
+  background: 
+  url('http://localhost:5500/back.png') 0px 0px;
+  }
+
+</style>
+</div>
+</head>
+<body>
+  <h2>Js Animations</h2>
+  <hr />
+  <p id="image"> </p>
+  <button onClick="openNewTab()">Show Original Image </button>
+  <button onClick="image .animate(t2, 5000)">Rotate</button>
+  <p>Special Thanks to Gussprint For Allowing Me To Use His Pixel Art <a href="https://www.spriters-resource.com/submitter/Gussprint/" 
+    target="NewTab"> 
+    CREDITS</a>
+ </p>
+
+  <hr />
+  <div id=box onClick="box.animate(t2, 5000)">
+    <span id=in>Ömer Kaan Adaş</span>
+  </div>
+  
+  
+  <button onClick="box .animate(t2, 5000)">Rotate</button>
+  <button onClick="box .animate(t3, 6000)">Color Change</button>
+  <button onClick="box .animate(t4, 6000)">Font Size</button>
+  </p>
+  
+ 
+  
+  <hr />
+  <b>Sample code</b>
+  <pre id=sample></pre>
+  
+  <hr />
+
+<script>
+  function openNewTab(){
+    window.open("http://localhost:5500/back.png", '_blank');
+  }
+
+  let
+  r0 = "rotate(0)", x0 = "translateX(0)",
+  t1 = { transform: [x0, "translateX(290px)", x0] },
+  t2 = { transform: [r0, "rotate(180deg)", r0, "rotate(-180deg)", r0] },
+  t3 = { background: ["#6b5b95", "#d64161", "#878f99", "#b2ad7f","#878f99"] },
+  t4 = { fontSize: ["200%", "350%", "100%", "150%", "100%"] },
+  a = [t1, t2, t3, t4];
+
+  var tID; 
+  function anim() {
+  var    position = 304; 
+  const  interval = 150; 
+  tID = setInterval ( () => {
+  document.getElementById("image").style.backgroundPosition = 
+  `-${position}px 0px`; 
+
+  if (position < 3000)
+  { position = position + 304;}
+  
+  else
+  { position = 304; }
+  //reset the position 
+  }
+  , interval ); //
+  } //end of anim
+  sample.innerText =anim
+  anim()
+</script>
+
+</body>
+</html>
